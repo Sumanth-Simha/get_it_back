@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Report Found Item{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Report Found Item</h2>
+
+    <form id="foundForm">
+        <input type="text" name="finder_name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+
+        <input type="text" id="itemNameField" name="item_name" placeholder="Item Name" required>
+
+        <textarea name="description" placeholder="Describe the item"></textarea>
+
+        <input type="text" name="found_place" placeholder="Where did you find it?" required>
+
+        <button class="btn">Submit</button>
+    </form>
+
+    <a href="/" class="btn btn-secondary">Back</a>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const name = params.get("item");
+if (name) {
+    document.getElementById("itemNameField").value = name;
+}
+</script>
+
+<script src="/static/script.js"></script>
+
+{% endblock %}

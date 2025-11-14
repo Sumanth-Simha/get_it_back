@@ -1,1 +1,63 @@
+{% extends "base.html" %}
 
+{% block title %}Get-It-Back{% endblock %}
+
+{% block content %}
+
+<div class="header">
+    <h1>Lost Items</h1>
+    <a href="/lost" class="btn">+ Add Lost Item</a>
+</div>
+
+<div class="list-container" id="lostList"></div>
+
+<script>
+async function loadLostItems() {
+    let res = await fetch("/api/list-lost");
+    let items = await res.json();
+
+    let container = document.getElementById("lostList");
+    container.innerHTML = "";
+
+    if (items.length === 0) {
+        container.innerHTML = "<p>No lost items reported yet.</p>";
+        return;
+    }
+
+    items.forEach(item => {
+        let foundHTML = "";
+
+        if (item.found_reports && item.found_reports.length > 0) {
+            foundHTML += "<h4>Found Reports:</h4>";
+            item.found_reports.forEach(rep => {
+                foundHTML += `
+                    <div class="found-card">
+                        <p><strong>Finder:</strong> ${rep.finder_name}</p>
+                        <p><strong>Email:</strong> ${rep.email}</p>
+                        <p><strong>Description:</strong> ${rep.description || "N/A"}</p>
+                        <p><strong>Found At:</strong> ${rep.found_place}</p>
+                        <p><strong>Date:</strong> ${rep.date}</p>
+                    </div>
+                `;
+            });
+        }
+
+        container.innerHTML += `
+        <div class="card">
+            <h3>${item.item_name}</h3>
+            <p><strong>Description:</strong> ${item.description || "N/A"}</p>
+            <p><strong>Lost At:</strong> ${item.lost_place}</p>
+            <p><strong>Reported By:</strong> ${item.name} (${item.email})</p>
+
+            <a href="/found?item=${encodeURIComponent(item.item_name)}"
+               class="btn-small">Report Found</a>
+
+            ${foundHTML}
+        </div>`;
+    });
+}
+
+loadLostItems();
+</script>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Add Lost Item{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Add Lost Item</h2>
+
+    <form id="lostForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+
+        <input type="text" name="item_name" placeholder="Item Name" required>
+        <textarea name="description" placeholder="Describe the item"></textarea>
+
+        <input type="text" name="lost_place" placeholder="Where did you lose it?" required>
+
+        <button class="btn">Submit</button>
+    </form>
+
+    <a href="/" class="btn btn-secondary">Back</a>
+</div>
+
+<script src="/static/script.js"></script>
+
+{% endblock %}

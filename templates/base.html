@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{% block title %}My App{% endblock %}</title>
+
+  <!-- Main App Styling (buttons, cards, layout, etc) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- Footer Styling -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+</head>
+<body>
+
+  <!-- page content -->
+  <div id="content">
+    {% block content %}{% endblock %}
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; <span id="current-year"></span> Sumanth. All rights reserved.</span>
+      <span class="pipe">|</span>
+      <a href="{{ url_for('license_file') }}" target="_blank" rel="noopener">MIT License</a>
+    </div>
+  </footer>
+
+  <script>
+    // set current year dynamically
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
