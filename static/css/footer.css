@@ -1,1 +1,38 @@
+/* Make sure body has space for fixed footer */
+body {
+    margin: 0;
+    padding-bottom: 70px; 
+    background: #f8f9fa;
+}
 
+/* Footer visible clearly */
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #e3e6ea;        /* <-- visible light grey */
+    padding: 12px 0;
+    border-top: 1px solid #bfc5cc;
+    text-align: center;
+    z-index: 999;
+}
+
+.footer-inner {
+    font-size: 14px;
+    color: #333;
+}
+
+.footer-inner a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer-inner a:hover {
+    text-decoration: underline;
+}
+
+.pipe {
+    margin: 0 8px;
+    color: #555;
+}
